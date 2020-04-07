@@ -15,6 +15,8 @@ namespace PCShop
                           "\n4->Print list of the computers" +
                           "\n5->Calculate the total price of the computers" +
                           "\n6->Еxit\n";
+            List<Computer> pcList = new List<Computer>();
+            int id = 0;
 
             while (exit != 6)
             {
@@ -38,11 +40,33 @@ namespace PCShop
                     if (option == 1)
                     {
                         Console.Clear();
+                        Console.Write("Enter computer brand: ");
+                        string brand = Console.ReadLine();
+                        Console.Write("Enter processor type: ");
+                        string processor = Console.ReadLine();
+                        Console.Write("Enter storage type: ");
+                        string storagetype = Console.ReadLine();
+                        Console.Write("Enter storage size: ");
+                        int storagesize = int.Parse(Console.ReadLine());
+                        Console.Write("Enter RAM size: ");
+                        int ram = int.Parse(Console.ReadLine());
+                        Console.Write("Enter computers price: ");
+                        int price = int.Parse(Console.ReadLine());
+                        Console.Write("Enter quantity: ");
+                        int quantity = int.Parse(Console.ReadLine());
+                        pcList.Add(new Computer(id, brand, processor, storagetype, storagesize, ram, price, quantity));
+                        id++;
+                        Console.Clear();
+                        Console.WriteLine("Computer added\n");
                     }
 
                     if (option == 2)
                     {
                         Console.Clear();
+                        foreach (Computer list in pcList)
+                        {
+                            Console.WriteLine(list+"\n");
+                        }
                     }
 
                     if (option == 3)

@@ -35,7 +35,17 @@ namespace PCShop
         public int Ram { get => ram; set => ram = value; }
         public int Price { get => price; set => price = value; }
         public int Quantity { get => quantity; set => quantity = value; }
+
+        public override string ToString()
+        {
+            return "ID: " + id +
+                   "\nBrand: " + brand +
+                   "\nProcessor type: " + processor +
+                   "\nStorage type: " + storagetype +
+                   "\nStorage size: " + storagesize +
+                   "\nRAM size: " + ram +
+                   "\nPrice: " + price +
+                   "\nQuantity: " + quantity;
+        }
     }
-
-
 }
