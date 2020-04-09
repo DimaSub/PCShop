@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PCShop
 {
@@ -63,9 +64,27 @@ namespace PCShop
                     if (option == 2)
                     {
                         Console.Clear();
+                        Console.WriteLine("Computers in inventory:");
+
                         foreach (Computer list in pcList)
                         {
                             Console.WriteLine(list+"\n");
+                        }
+
+                        Console.Write("Please select id to delete: ");
+                        int del = int.Parse(Console.ReadLine());
+                        var id_del = pcList.SingleOrDefault(x => x.Id == del);
+                        if (id_del != null)
+                        {
+                            pcList.Remove(id_del);
+                            Console.Clear();
+                            Console.WriteLine("ID: {0} was successfully deleted\n", del);
+                        }
+
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("ID not found\n");
                         }
                     }
 
