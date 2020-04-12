@@ -78,7 +78,7 @@ namespace PCShop
                         {
                             pcList.Remove(id_del);
                             Console.Clear();
-                            Console.WriteLine("ID: {0} was successfully deleted\n", del);
+                            Console.WriteLine("ID {0}: was successfully deleted\n", del);
                         }
 
                         else
@@ -91,16 +91,57 @@ namespace PCShop
                     if (option == 3)
                     {
                         Console.Clear();
+                        Console.Write("Please select pc brand to find: ");
+                        string brand = Console.ReadLine();
+                        Console.WriteLine();
+
+                        List<Computer> pcBrand = new List<Computer>();
+
+                        foreach (Computer list in pcList)
+                        {
+                            if (list.Brand == brand)
+                            {
+                                pcBrand.Add(list);
+                            }
+                        }
+
+                        if (pcBrand.Any())
+                        {
+                            foreach (Computer list in pcBrand)
+                            {
+                                Console.WriteLine(list + "\n");
+                            }
+                        }
+
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Brand doesnt exist\n");
+                        }
                     }
 
                     if (option == 4)
                     {
                         Console.Clear();
+                        Console.WriteLine("Computers in inventory:");
+
+                        foreach (Computer list in pcList)
+                        {
+                            Console.WriteLine(list + "\n");
+                        }
                     }
 
                     if (option == 5)
                     {
                         Console.Clear();
+                        int sum = 0;
+                        foreach (Computer list in pcList)
+                        {
+                            sum = sum + list.Price;
+                        }
+
+                        Console.Clear();
+                        Console.WriteLine("Total computer price is: {0}\n", sum);
                     }
 
                     if (option == 6)
