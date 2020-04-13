@@ -5,7 +5,7 @@ namespace PCShop
 {
     public class Computer
     {
-        public Computer(int id, string brand, string processor, string storagetype, int storagesize, int ram, int price, int quantity)
+        public Computer(int id, string brand, string processor, string storagetype, int storagesize, int ram, int price, int quantity, string[] accessories)
         {
             this.id = id;
             this.brand = brand;
@@ -15,6 +15,7 @@ namespace PCShop
             this.ram = ram;
             this.price = price;
             this.quantity = quantity;
+            this.accessories = accessories;
         }
 
         private int id;
@@ -25,7 +26,7 @@ namespace PCShop
         private int ram;
         private int price;
         private int quantity;
-        //private List<Accessories> accessories;
+        private string[] accessories;
 
         public int Id { get => id; set => id = value; }
         public string Brand { get => brand; set => brand = value; }
@@ -35,6 +36,7 @@ namespace PCShop
         public int Ram { get => ram; set => ram = value; }
         public int Price { get => price; set => price = value; }
         public int Quantity { get => quantity; set => quantity = value; }
+        public string[] Accessories { get => accessories; set => accessories = value; }
 
         public override string ToString()
         {
@@ -45,7 +47,8 @@ namespace PCShop
                    "\nStorage size: " + storagesize +
                    "\nRAM size: " + ram +
                    "\nPrice: " + price +
-                   "\nQuantity: " + quantity;
+                   "\nQuantity: " + quantity +
+                   "\nAccessories: " + String.Join(", ", accessories);
         }
     }
 }

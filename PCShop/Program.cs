@@ -48,14 +48,74 @@ namespace PCShop
                         Console.Write("Enter storage type: ");
                         string storagetype = Console.ReadLine();
                         Console.Write("Enter storage size: ");
-                        int storagesize = int.Parse(Console.ReadLine());
+                        string storagechk = Console.ReadLine();
+
+                        while (!int.TryParse(storagechk, out int value))
+                        {
+                            Console.Write("\"{0}\" is not a valid option, please select again: \n", storagechk);
+                            Console.Write("Please enter correct storage size: ");
+                            storagechk = Console.ReadLine();
+                        }
+
+                        int storagesize = int.Parse(storagechk);
                         Console.Write("Enter RAM size: ");
-                        int ram = int.Parse(Console.ReadLine());
+                        string ramchk = Console.ReadLine();
+
+                        while (!int.TryParse(ramchk, out int value))
+                        {
+                            Console.Write("\"{0}\" is not a valid option, please select again: \n", ramchk);
+                            Console.Write("Please enter correct RAM size: ");
+                            ramchk = Console.ReadLine();
+                        }
+
+                        int ram = int.Parse(ramchk);
                         Console.Write("Enter computers price: ");
-                        int price = int.Parse(Console.ReadLine());
+                        string pricechk = Console.ReadLine();
+
+                        while (!int.TryParse(pricechk, out int value))
+                        {
+                            Console.Write("\"{0}\" is not a valid option, please select again: \n", pricechk);
+                            Console.Write("Please enter correct price: ");
+                            pricechk = Console.ReadLine();
+                        }
+
+                        int price = int.Parse(pricechk);
                         Console.Write("Enter quantity: ");
-                        int quantity = int.Parse(Console.ReadLine());
-                        pcList.Add(new Computer(id, brand, processor, storagetype, storagesize, ram, price, quantity));
+                        string quantitychk = Console.ReadLine();
+
+                        while (!int.TryParse(quantitychk, out int value))
+                        {
+                            Console.Write("\"{0}\" is not a valid option, please select again: \n", quantitychk);
+                            Console.Write("Please enter correct quantity: ");
+                            quantitychk = Console.ReadLine();
+                        }
+
+                        int quantity = int.Parse(quantitychk);
+                        Console.Write("Enter number of accessories to add: ");
+                        string accessoriesnumchk = Console.ReadLine();
+
+                        while (!int.TryParse(accessoriesnumchk, out int value))
+                        {
+                            Console.Write("\"{0}\" is not a valid option, please select again: \n", accessoriesnumchk);
+                            Console.Write("Please enter correct number of accessories to add: ");
+                            accessoriesnumchk = Console.ReadLine();
+                        }
+
+                        int accessoriesnum = int.Parse(accessoriesnumchk);
+                        string[] accessories;
+                        if (accessoriesnum != 0)
+                        {
+                            accessories = new string[accessoriesnum];
+                            for (int i = 0; i < accessoriesnum; i++)
+                            {
+                                Console.Write("Enter accessory number {0} out of {1}: ", i + 1, accessoriesnum);
+                                accessories[i] = Console.ReadLine();
+                            }
+                        }
+
+                        else accessories = new string[1] {"None"};
+
+                        pcList.Add(new Computer(id, brand, processor, storagetype, storagesize, ram, price, quantity, accessories));
                         id++;
                         Console.Clear();
                         Console.WriteLine("Computer added\n");
@@ -64,28 +124,42 @@ namespace PCShop
                     if (option == 2)
                     {
                         Console.Clear();
-                        Console.WriteLine("Computers in inventory:");
-
-                        foreach (Computer list in pcList)
+                        if (pcList.Any())
                         {
-                            Console.WriteLine(list+"\n");
+                            Console.WriteLine("Computers in inventory:");
+
+                            foreach (Computer list in pcList)
+                            {
+                                Console.WriteLine(list + "\n");
+                            }
+
+                            Console.Write("Please select id to delete: ");
+                            string delchk = Console.ReadLine();
+
+                            while (!int.TryParse(delchk, out int value))
+                            {
+                                Console.Write("\"{0}\" is not a valid option, please select again: \n", delchk);
+                                Console.Write("Please enter correct ID input: ");
+                                delchk = Console.ReadLine();
+                            }
+
+                            int del = int.Parse(delchk);
+                            var id_del = pcList.SingleOrDefault(x => x.Id == del);
+                            if (id_del != null)
+                            {
+                                pcList.Remove(id_del);
+                                Console.Clear();
+                                Console.WriteLine("ID {0}: was successfully deleted\n", del);
+                            }
+
+                            else
+                            {
+                                Console.Clear();
+                                Console.WriteLine("ID not found\n");
+                            }
                         }
 
-                        Console.Write("Please select id to delete: ");
-                        int del = int.Parse(Console.ReadLine());
-                        var id_del = pcList.SingleOrDefault(x => x.Id == del);
-                        if (id_del != null)
-                        {
-                            pcList.Remove(id_del);
-                            Console.Clear();
-                            Console.WriteLine("ID {0}: was successfully deleted\n", del);
-                        }
-
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("ID not found\n");
-                        }
+                        else Console.WriteLine("No computers in inventory\n");
                     }
 
                     if (option == 3)
@@ -123,12 +197,17 @@ namespace PCShop
                     if (option == 4)
                     {
                         Console.Clear();
-                        Console.WriteLine("Computers in inventory:");
-
-                        foreach (Computer list in pcList)
+                        if (pcList.Any())
                         {
-                            Console.WriteLine(list + "\n");
+                            Console.WriteLine("Computers in inventory:");
+
+                            foreach (Computer list in pcList)
+                            {
+                                Console.WriteLine(list + "\n");
+                            }
                         }
+
+                        else Console.WriteLine("No computers in inventory\n");
                     }
 
                     if (option == 5)
